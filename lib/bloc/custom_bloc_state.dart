@@ -6,15 +6,14 @@ enum CustomBlocStatus{
   reset
 }
 class CustomBlocState extends Equatable{
-  CustomBlocStatus status;
-  CustomBlocState(this.status);
+  final CustomBlocStatus status;
+  const CustomBlocState(this.status);
   CustomBlocState copyWith(CustomBlocStatus blocStatus)
   {
     return CustomBlocState(blocStatus);
   }
 
   @override
-  // TODO: implement props
   List<Object?> get props => [status];
   
 }
