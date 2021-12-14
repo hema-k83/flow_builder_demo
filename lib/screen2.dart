@@ -8,9 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Screen2 extends StatelessWidget {
-   Screen2({Key? key, required this.param}) : super(key: key);
+  Screen2({Key? key, required this.param}) : super(key: key);
   final String param;
-  final CustomBloc customBloc = CustomBloc(const CustomBlocState(CustomBlocStatus.yetToInvoke));
+  final CustomBloc customBloc =
+      CustomBloc(const CustomBlocState(CustomBlocStatus.yetToInvoke));
   @override
   Widget build(BuildContext context) {
     return BlocListener<CustomBloc, CustomBlocState>(
@@ -22,20 +23,20 @@ class Screen2 extends StatelessWidget {
               .then((value) => {
                     if (value)
                       {
-                        customBloc.add(CustomBlocResetEvent()),//Please ignore this in actual code such events are not there
-                         context.flow<CustomFlowState>().complete(),//TODO Problem Solve
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const Screen3())),
-                        Navigator.push(
-                            context,
+                        customBloc.add(
+                            CustomBlocResetEvent()), //Please ignore this in actual code such events are not there
+                        context
+                            .flow<CustomFlowState>()
+                            .complete(), //TODO Problem Solve
+                        Navigator.of(context, rootNavigator: true).push(
                             MaterialPageRoute(
-                                builder: (context) => const Screen3()))
+                                builder: (context) => const Screen3())),
                         //context.flow<CustomFlowState>().complete(),
                       }
                     else
                       {
                         customBloc.add(CustomBlocResetEvent()),
-                       print("Not Leaving")
+                        print("Not Leaving")
                       }
                   });
         }
@@ -56,7 +57,8 @@ class Screen2 extends StatelessWidget {
                     ),
                     ElevatedButton(
                         child: const Text("Leave"),
-                        onPressed: () => customBloc.add(CustomBlocInvokeEvent()))
+                        onPressed: () =>
+                            customBloc.add(CustomBlocInvokeEvent()))
                   ]),
             ),
           );
